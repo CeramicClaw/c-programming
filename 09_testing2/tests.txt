@@ -1,0 +1,46 @@
+aaaaa aaaaa
+aaaaa bbbbb
+aaaab ccccd
+aaabb cccdd
+aabbb ccddd
+abbbb cdddd
+bbbbb ddddd
+abcde fghij
+!!!!! qwert
+qqert !!!!a
+!!!! !!!!
+
+           
+11111 23456
+????? ,.<>_
+ 0092 12345
+abcde fffff
+abcde !!!!!
+12345 67890
+12345
+1111111111
+EXIT_SUCCESS
+'
+' ;
+AAaab ccccc
+aabcd DDdef
+abcde fghij
+aabcd efghi
+aaabc defgh
+aaaab cdefg
+aaaaa bcdef
+abcde ffghi
+abcde fffgh
+abcde ffffg
+abcde fffff
+aaaaa fffffffff
+aaaaaaa fffff
+ab!!! bbbcd
+111ab bbcde
+111ab !!cde
+   bc ddfgh
+ab    ddfgh
+ab de fg
+abcde &&def
+aabcd aaadd
+aabcd aaa
