@@ -4,7 +4,7 @@
 size_t maxSeq(int * array, size_t n);
 
 size_t  runTest(int * array, size_t n, size_t expected) {
-  size_t test = maxSeq(array, n);
+  int test = maxSeq(array, n);
   if (test != expected){
     return 0;
   }
@@ -19,8 +19,11 @@ int main (void) {
   int array2[] = {1, 2, 2, 4, 5, 6, 6, 4, 6};
   int array3[] = {0};
   int array4[] = {};
-  sumTest = (runTest(array1, 5, 4) + runTest(array2, 9, 4) + runTest(array3, 1, 1) + runTest(array4, 0, 0));
-  if (sumTest == 4){
+  if (maxSeq(array4, 0) != 0) {
+    return EXIT_FAILURE;
+  }
+  sumTest = (runTest(array1, 5, 4) + runTest(array2, 9, 4) + runTest(array3, 1, 1));
+  if (sumTest == 3){
     return EXIT_SUCCESS;
   }
   else {
