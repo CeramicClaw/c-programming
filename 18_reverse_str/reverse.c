@@ -4,8 +4,10 @@
 
 void reverse(char * str) {
   int stlen = strlen(str);
+  if (stlen == 0) {
+    return;
+  }
   char strRev[stlen];
-  
   for(int i = 0; i < stlen; i++) {
     strRev[i] = str[(stlen - i - 1)];
   }
