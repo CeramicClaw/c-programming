@@ -1,62 +1,63 @@
-Grading at Wed Apr  3 17:09:03 UTC 2019
+Grading at Wed Apr  3 23:44:34 UTC 2019
 **Testing broken implementation 10 **
 -------------------------------------
 
-Incorrect!
+Incorrect! -2 ^ 2 expected 4 actual -2
 
 **Testing broken implementation 11 **
 -------------------------------------
 
-Incorrect!
+Incorrect! -2 ^ 2 expected 4 actual 36
 
 **Testing broken implementation 1 **
 -------------------------------------
 
-Incorrect!
+Incorrect! 0 ^ 1 expected 0 actual 1
 
 **Testing broken implementation 2 **
 -------------------------------------
 
-Incorrect!
+Incorrect! 0 ^ 1 expected 0 actual 1
 
 **Testing broken implementation 3 **
 -------------------------------------
 
-Incorrect!
+Incorrect! 0 ^ 0 expected 1 actual 0
 
 **Testing broken implementation 4 **
 -------------------------------------
 
-Incorrect!
+Incorrect! -2 ^ 3 expected -8 actual 65528
 
 **Testing broken implementation 5 **
 -------------------------------------
 
-Incorrect!
+Incorrect! -2 ^ 2 expected 4 actual 6
 
 **Testing broken implementation 6 **
 -------------------------------------
 
-Incorrect!
+Incorrect! 0 ^ 1 expected 0 actual 2
 
 **Testing broken implementation 7 **
 -------------------------------------
 
-Incorrect!
+Incorrect! 0 ^ 1 expected 0 actual 3
 
 **Testing broken implementation 8 **
 -------------------------------------
 
-Incorrect!
+Incorrect! -2 ^ 2 expected 4 actual -4
 
 **Testing broken implementation 9 **
 -------------------------------------
 
-Incorrect!
+Incorrect! -2 ^ 2 expected 4 actual -2
 
 **Testing correct implementation **
 -------------------------------------
 
+0
 
 All tests were ok.
 
