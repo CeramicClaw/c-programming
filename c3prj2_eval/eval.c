@@ -133,6 +133,9 @@ int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
   else {
     //Card has to match suit
     card_to_find.suit = fs;
+    if (card_to_find.suit != (*(*hand).cards[index]).suit) {
+      return 0;
+    }
     int len = 0;
     for (int i = 0; i < n; i++) {
       if (deck_contains(hand, card_to_find) == 1) {
