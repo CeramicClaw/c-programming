@@ -4,43 +4,252 @@
 #include <assert.h>
 
 int card_ptr_comp(const void * vp1, const void * vp2) {
-  return 0;
+  /*Sort hands by value in descending order  using quicksort
+    If they have the same value, sort by suit: club < diamond < heart < spade
+   */
+  const card_t * const * cp1 = vp1;
+  const card_t * const * cp2 = vp2;
+  
+  if ((**cp1).value > (**cp2).value) {
+    return -1;
+  }
+  else if ((**cp1).value < (**cp2).value) {
+    return 1;
+  }
+  else {
+    if ((**cp1).suit > (**cp2).suit) {
+      return -1;
+    }
+    else if ((**cp1).suit < (**cp2).suit) {
+      return 1;
+    }
+    else {
+      return 0;
+    }
+  }
 }
 
 suit_t flush_suit(deck_t * hand) {
+  /* Looks at hand and determines if it is a flush
+     If so, it returns the suit of the cards comprising the flush (SPADES, HEARTS, etc.)
+     If not, it returns NUM_SUITS
+   */
+  int n_spades = 0;
+  int n_hearts = 0;
+  int n_diamonds = 0;
+  int n_clubs = 0;
+  for(int i = 0; i < (*hand).n_cards; i++) {
+    switch ((*(*hand).cards[i]).suit) {
+    case SPADES: n_spades++; break;
+    case HEARTS: n_hearts++; break;
+    case DIAMONDS: n_diamonds++; break;
+    case CLUBS: n_clubs++; break;
+    default: break;
+    }
+  }
+  if (n_spades >= 5) { return SPADES; }
+  if (n_hearts >=5) { return HEARTS; }
+  if (n_diamonds >=5) { return DIAMONDS; }
+  if (n_clubs >=5) { return CLUBS; }
   return NUM_SUITS;
 }
 
 unsigned get_largest_element(unsigned * arr, size_t n) {
-  return 0;
+  // Returns largest element in an array of unsigned integers
+  if (n == 1) {
+    return arr[0];
+  }
+  unsigned largest = arr[0];
+  for (int i = 0; i < (n - 1); i++) {
+    if (arr[i + 1] > largest) {
+      largest = arr[i + 1];
+    }
+  }
+  return largest;
 }
 
 size_t get_match_index(unsigned * match_counts, size_t n,unsigned n_of_akind){
-
+  /* Returns the index in the array (match_counts) whose value is n_of_akind
+     The array has n elements
+     If there are multiple values equal to n_of_akind, return the LOWEST index
+  */
+  for (int i = 0; i < n; i++) {
+    if (match_counts[i] == n_of_akind) {
+      return i;
+    }
+  }
   return 0;
 }
 ssize_t  find_secondary_pair(deck_t * hand,
 			     unsigned * match_counts,
 			     size_t match_idx) {
+  /* Look for another pair if there is a 3 of a kind or a pair
+     Takes in the hand, match counts from before, and the index of the original match
+     It should find the index of a card under the following conditions:
+       - Match count is > 1 (i.e. at least a pair)
+       - Card value is not the same as value of the card at match_idx
+       - It is the lowest index meeting the first 2 conditions
+     If no such index is found, return -1
+  */  
+  for (int i = 0; i < (*hand).n_cards; i++) {
+    if (match_counts[i] > 1) {
+      if (i == match_idx) {
+	i += (match_counts[i] - 1);
+	continue;
+      }
+      return i;
+    }
+  }
   return -1;
 }
 
-int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
+int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
+  card_t card_to_find;
+  int search_len = n;
+  int straight_len = 1;
+  card_to_find.value = (*(*hand).cards[index]).value;
+  if (fs == NUM_SUITS) {
+    //Only worry if the next card is lower in value, suit doesn't matter
+    for (int i = 0; i < ((*hand).n_cards - index - 1)  ; i++) {
+      if ( (*(*hand).cards[index + i]).value == (*(*hand).cards[index + i + 1]).value) {
+	search_len++;
+	continue;
+      }
+      if ( ((*(*hand).cards[index + i]).value) == ((*(*hand).cards[index + i+1]).value + 1) ) {
+	straight_len++;
+	continue;
+      }
+      else if (straight_len >= n) {
+	return 1;
+      }
+      else {
+	return 0;
+      }
+    }
+    if (straight_len >= n) {
+	return 1;
+      }
+  }
+  else {
+    //Card has to match suit
+    card_to_find.suit = fs;
+    int len = 0;
+    for (int i = 0; i < n; i++) {
+      if (deck_contains(hand, card_to_find) == 1) {
+	  len++;
+	  card_to_find.value--;
+      }
+    }
+    if (len >= n){
+      return 1;
+    }
+    return 0;
+  }
   return 0;
 }
+
+int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs) {
+  if ( (*(*hand).cards[index]).value == 14  ) {
+    if (fs == NUM_SUITS) {
+      for (int i = 0; i < (*hand).n_cards; i++) {
+	if ( (*(*hand).cards[i]).value == 5) {
+	  return is_n_length_straight_at(hand, i, fs, 4);
+	}
+      }
+    }
+    else {
+      for (int i = 0; i < (*hand).n_cards; i++) {
+	if ( ((*(*hand).cards[i]).value == 5) && ( (*(*hand).cards[i]).suit == fs ) ) {
+	  return is_n_length_straight_at(hand, i, fs, 4);
+	}
+      }
+    }
+  }
+  return 0;
+}
+
+int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
+  /* Determine if there is a straight starting at index (and only index) in the given hand
+     If fs = NUM_SUITS, then it should look for any straight
+     If fs = anyhing else, look for a straight flush and return:
+     - `-1` if an Ace-low straight was found at that index
+     - `0` if no straight was found at that index
+     - `1` if any other straight was found at that index
+     
+     Assume the hand is sorted by value in descending order (A, K, Q, ...)
+  */
+  if ( is_n_length_straight_at(hand, index, fs, 5) == 1 ) {
+    return 1;
+  }
+  if ( is_ace_low_straight_at(hand, index, fs) == 1 ) {
+    return -1;
+  }
+  return 0;
+}
+
+
 
 hand_eval_t build_hand_from_match(deck_t * hand,
 				  unsigned n,
 				  hand_ranking_t what,
 				  size_t idx) {
-
+  /* Construct a hand_eval_t which has the ranking and 5 cards used for it
+     It should make a hand_eval_t and set its ranking to the passed "what" value,
+     copy "n" cards from the hand, starting at "idx" in to the first "n" elements fo the hand_eval_t "cards" array
+   */
   hand_eval_t ans;
+  ans.ranking = what;
+  if (n == 0) {
+    for (int i = 0; i < 5; i++) {
+      ans.cards[i] = (*hand).cards[i];
+    }
+    return ans;
+  }
+  
+  for (int i = 0; i < n; i++) {
+    ans.cards[i] = (*hand).cards[idx + i];
+  }
+  int cards_in_ans = n;
+  for  (int i = 0; cards_in_ans < 5; i++) {
+    if (i == idx) {
+      i += (n - 1);
+      continue;
+    }
+    ans.cards[cards_in_ans] = (*hand).cards[i];
+    cards_in_ans++;
+  }
   return ans;
 }
 
 
 int compare_hands(deck_t * hand1, deck_t * hand2) {
-
+  /* 1. Sort each hand using qsort on the hand's cards and card_ptr_comp
+     2. Call evaluate_hand on each hand that returns a hand_eval_t
+     3. Check if rankings in hand_eval_t are the same or different and use the ranking to determine a winner
+     4. If they are the same, look at the values in the cards array of each hand_eval_t to break the tie. Compare element 0 of each hand, then element 1, etc. until reaching the end
+     5. If hand 1 is better, return 1. If hand 2, return -1. If tie, return 0
+  */
+  qsort((*hand1).cards, (*hand1).n_cards, sizeof(const card_t * const *), card_ptr_comp);
+  qsort((*hand2).cards, (*hand2).n_cards, sizeof(const card_t * const *), card_ptr_comp);
+  hand_eval_t hand1_eval = evaluate_hand(hand1);
+  hand_eval_t hand2_eval = evaluate_hand(hand2);
+  if (hand1_eval.ranking < hand2_eval.ranking) {
+    return 1;
+  }
+  else if (hand1_eval.ranking > hand2_eval.ranking) {
+    return -1;
+  }
+  for (int i = 0; i < 5; i++) {
+    if ((*(*hand1).cards[i]).value > ((*(*hand2).cards[i]).value)) {
+      return 1;
+    }
+    else if ((*(*hand1).cards[i]).value < ((*(*hand2).cards[i]).value)) {
+      return 0;
+    }
+    else {
+      continue;
+    }
+  }
   return 0;
 }
 
