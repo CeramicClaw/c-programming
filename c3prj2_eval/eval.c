@@ -240,11 +240,11 @@ int compare_hands(deck_t * hand1, deck_t * hand2) {
     return -1;
   }
   for (int i = 0; i < 5; i++) {
-    if ((*(*hand1).cards[i]).value > ((*(*hand2).cards[i]).value)) {
+    if ( (*hand1_eval.cards[i]).value > (*hand2_eval.cards[i]).value) {
       return 1;
     }
-    else if ((*(*hand1).cards[i]).value < ((*(*hand2).cards[i]).value)) {
-      return 0;
+    else if ((*hand1_eval.cards[i]).value < (*hand2_eval.cards[i]).value) {
+      return -1;
     }
     else {
       continue;
