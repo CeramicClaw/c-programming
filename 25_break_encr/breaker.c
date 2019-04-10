@@ -46,7 +46,7 @@ int convert_to_e(char c) {
   if (c >= 'e') {
     return (c - 'e');
   }
-  return ('e' - c + 22);
+  return ('e' - c + 18);
 }
 
 int main(int argc, char ** argv) {
@@ -60,6 +60,7 @@ int main(int argc, char ** argv) {
     return EXIT_FAILURE;
   }
   char c = frequency(f); //The most common letter in the file. Assume it is 'e'
+  printf("Most common letter is '%c'.\n",c);
   printf("%d\n",convert_to_e(c));
   return EXIT_SUCCESS;
 }
