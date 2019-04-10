@@ -51,7 +51,7 @@ int convert_to_e(char c) {
 
 int main(int argc, char ** argv) {
   if (argc != 2) {
-    printf("Please provide an input file.\n");
+    fprintf(stderr, "Please provide an input file.\n");
     return EXIT_FAILURE;
   }
   FILE * f = fopen(argv[1], "r");
