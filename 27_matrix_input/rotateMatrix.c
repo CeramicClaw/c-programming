@@ -31,7 +31,7 @@ void rotate(char matrix[10][10]) {
 
 void clearMatrix(char matrix[12]) {
   for (int i = 0; i < 12; i++) {
-    matrix[i] = NULL;
+    matrix[i] = 0;
   }
 }
 
@@ -72,7 +72,7 @@ int main (int argc, char ** argv) {
     num_lines++;
     clearMatrix(line);
   }
-  if (num_lines != 9) {
+  if (num_lines != 10) {
     printf("Too few lines!\n");
     return EXIT_FAILURE;
   }
