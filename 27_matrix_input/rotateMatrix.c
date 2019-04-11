@@ -59,11 +59,11 @@ int main (int argc, char ** argv) {
   char matrix[10][10];
   while ( fgets(line, 12, f) != NULL ) {
     if ( (strchr(line, '\n') == NULL) || (line[10] != '\n') ) {
-      printf("Incorrect line size!\n");
+      fprintf(stderr,"Incorrect line size!\n");
       return EXIT_FAILURE;
     }
     if (num_lines > 9) {
-      printf("Too many lines!\n");
+      fprintf(stderr,"Too many lines!\n");
       return EXIT_FAILURE;
     } 
     for(int i = 0; i < 10; i++) {
@@ -73,7 +73,7 @@ int main (int argc, char ** argv) {
     clearMatrix(line);
   }
   if (num_lines != 10) {
-    printf("Too few lines!\n");
+    fprintf(stderr,"Too few lines!\n");
     return EXIT_FAILURE;
   }
   if(fclose(f) != 0) {
