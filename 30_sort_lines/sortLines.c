@@ -42,11 +42,11 @@ char ** copyLines(FILE * f, char ** lineArray, size_t * numLines) {
 }
 
 int main(int argc, char ** argv) {
-  char ** lineArray = NULL;
-  size_t numLines = 0;
   /*If argc == 1: Read from standard input, Sort the lines, Print the results/Free memory, Exit successfully
   */
   if(argc == 1) {
+    char ** lineArray = NULL;
+    size_t numLines = 0;
     lineArray = copyLines(stdin, lineArray, &numLines);
     sortData(lineArray, numLines);
     printLines(lineArray, numLines);
@@ -65,6 +65,8 @@ int main(int argc, char ** argv) {
 	fprintf(stderr, "Could not open file\n");
 	return EXIT_FAILURE;
       }
+      char ** lineArray = NULL;
+      size_t numLines = 0;
       lineArray = copyLines(f, lineArray, &numLines);
       sortData(lineArray, numLines);
       printLines(lineArray, numLines);
