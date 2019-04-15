@@ -41,9 +41,28 @@ void addRandomMine(board_t * b) {
 }
 
 board_t * makeBoard(int w, int h, int numMines) {
-  //WRITE ME!
-  return NULL;
+  /* malloc and intialize a board_t representing the board of size w by h
+     Fill in all squares with UNKNOWN then call addRandomMine numMines times
+     Note: b->board[y][x] where y = [0, h] and x [0, w]
+  */
+  board_t * boardPtr = NULL;
+  boardPtr = malloc(sizeof(board_t));
+  (*boardPtr).width = w;
+  (*boardPtr).height = h;
+  (*boardPtr).totalMines = numMines;
+  (*boardPtr).board = malloc(h * sizeof(*(*boardPtr).board));
+  for (int i = 0; i < h; i++) {
+    (*boardPtr).board[i] = malloc(w * sizeof(int));
+    for (int j = 0; j < w; j++) {
+      (*boardPtr).board[i][j] = UNKNOWN;
+    }
+  }
+  for (int i = 0; i < numMines; i++) {
+    addRandomMine(boardPtr);
+  }
+  return boardPtr;
 }
+
 void printBoard(board_t * b) {    
   int found = 0;
   printf("    ");
@@ -95,8 +114,29 @@ void printBoard(board_t * b) {
   printf("\nFound %d of %d mines\n", found, b->totalMines);
 }
 int countMines(board_t * b, int x, int y) {
-  //WRITE ME!
-  return 0;
+  /* Count number of mines in surrounding 8 squares at a given (x, y)
+     Use IS_MINE(b->board[ny][nx]) to test if a square is a mine
+  */
+  int count = 0;
+  for(int i = -1; i <= 1; i++) {
+    if ( ((i + x) < 0) || ((i + x) >= (*b).width) ) {
+      continue;
+      }
+    else {
+      for(int j = -1; j <= 1; j++) {
+	if ( ((j + y) < 0) || ((j + y) >= (*b).height) ) {
+	  continue;
+	}
+	else if ( (i == 0) && (j == 0) ) {
+	  continue;
+	}
+	if (IS_MINE(b->board[(j+y)][(i + x)])) {
+	  count++;
+	}
+      }
+    }
+  }
+  return count;
 }
 int click (board_t * b, int x, int y) {
   if (x < 0 || x >= b->width ||
@@ -118,12 +158,29 @@ int click (board_t * b, int x, int y) {
 }
 
 int checkWin(board_t * b) {
-  //WRITE ME!
-  return 0;
+  /* Checks if game has been won
+     Occurs when no squares are unknown
+     Return 0 if no, 1 if yes
+  */
+  for (int i = 0; i < (*b).width; i++) {
+    for (int j = 0; j < (*b).height; j++) {
+      if ((*b).board[j][i] == UNKNOWN) {
+	return 0;
+      }
+    }
+  }
+  return 1;
 }
 
 void freeBoard(board_t * b) {
-  //WRITE ME!
+  /* Frees all memory associated with it (including arrays)
+     i.e. undo all decisions made by a call to makeBoard
+  */
+  for(int i = 0; i < (*b).height; i++) {
+    free( (*b).board[i] );
+  }
+  free((*b).board);
+  free(b);
 }
 
 int readInt(char ** linep, size_t * lineszp) {
