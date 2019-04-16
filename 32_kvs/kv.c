@@ -28,6 +28,10 @@ kvarray_t * readKVs(const char * fname) {
      Return the kvarray_t * that has the array
   */
   FILE * f = fopen(fname, "r");
+  if (f == NULL) {
+    fprintf(stderr,"Could not open file");
+    return EXIT_FAILURE;
+  }
   kvarray_t * ans = malloc(sizeof(*ans));
   ans->KVs = NULL;
   char * line = NULL;
