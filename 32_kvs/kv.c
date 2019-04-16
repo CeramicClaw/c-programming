@@ -72,7 +72,7 @@ char * lookupValue(kvarray_t * pairs, const char * key) {
   //If no match is found, return NULL
   for (int i = 0; i < pairs->num_KVs; i++) {
     if ( strcmp(pairs->KVs[i]->key,key) == 0) {
-      return pairs->KVs[i]->key;
+      return pairs->KVs[i]->value;
     }
   }
   return NULL;
