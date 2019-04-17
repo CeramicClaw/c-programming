@@ -53,10 +53,10 @@ void printCounts(counts_t * c, FILE * outFile) {
      Format is:  'Captain: #' OR '<unknown> : #'
   */
   for(int i = 0; i < c->numCounts; i++) {
-    printf("%s: %d\n",c->countArray[i]->str, c->countArray[i]-> numTimes);
+    fprintf(outFile,"%s: %d\n",c->countArray[i]->str, c->countArray[i]-> numTimes);
   }
   if(c->numUnknown > 0) {
-    printf("<unknown> : %d\n",c->numUnknown);
+    fprintf(outFile,"<unknown> : %d\n",c->numUnknown);
   }
 }
 
