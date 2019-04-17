@@ -29,7 +29,7 @@ counts_t * countFile(const char * filename, kvarray_t * kvPairs) {
 }
 
 char * foutName(char * filename) {
-  const char * end = ".ans";
+  const char * end = ".count";
   int len = strlen(filename) + strlen(end) + 1;
   char * outName = malloc(len * sizeof(*outName));
   snprintf(outName, len, "%s%s", filename, end);
