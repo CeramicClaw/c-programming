@@ -1,4 +1,4 @@
-Grading at Wed Apr 17 21:01:46 UTC 2019
+Grading at Wed Apr 17 21:04:35 UTC 2019
 Attempting to compile:
 rm -f  outname.o  counts.o  main.o  kv.o count_values *~
 gcc -c -Wall -Werror -std=gnu99 -pedantic -ggdb3 outname.c
@@ -17,9 +17,9 @@ I expected to find a file called '62list1a.txt.counts' but it did not exist
 (or was not a regular file)
 Here are the files that I can find:
 62list1a.txt
-62list1a.txt.ans
+62list1a.txt.count
 62list1b.txt
-62list1b.txt.ans
+62list1b.txt.count
 62list2a.txt
 62list2b.txt
 62list2c.txt
@@ -30,6 +30,7 @@ counts.o
 count_values
 count_values.stderr
 count_values.stdout
+grade.txt
 kv.c
 kv.h
 kv.o
@@ -61,9 +62,9 @@ I expected to find a file called '62list1b.txt.counts' but it did not exist
 (or was not a regular file)
 Here are the files that I can find:
 62list1a.txt
-62list1a.txt.ans
+62list1a.txt.count
 62list1b.txt
-62list1b.txt.ans
+62list1b.txt.count
 62list2a.txt
 62list2b.txt
 62list2c.txt
@@ -74,6 +75,7 @@ counts.o
 count_values
 count_values.stderr
 count_values.stdout
+grade.txt
 kv.c
 kv.h
 kv.o
@@ -105,15 +107,15 @@ I expected to find a file called '62list2a.txt.counts' but it did not exist
 (or was not a regular file)
 Here are the files that I can find:
 62list1a.txt
-62list1a.txt.ans
+62list1a.txt.count
 62list1b.txt
-62list1b.txt.ans
+62list1b.txt.count
 62list2a.txt
-62list2a.txt.ans
+62list2a.txt.count
 62list2b.txt
-62list2b.txt.ans
+62list2b.txt.count
 62list2c.txt
-62list2c.txt.ans
+62list2c.txt.count
 62list3a.txt
 counts.c
 counts.h
@@ -121,6 +123,7 @@ counts.o
 count_values
 count_values.stderr
 count_values.stdout
+grade.txt
 kv.c
 kv.h
 kv.o
@@ -152,15 +155,15 @@ I expected to find a file called '62list2b.txt.counts' but it did not exist
 (or was not a regular file)
 Here are the files that I can find:
 62list1a.txt
-62list1a.txt.ans
+62list1a.txt.count
 62list1b.txt
-62list1b.txt.ans
+62list1b.txt.count
 62list2a.txt
-62list2a.txt.ans
+62list2a.txt.count
 62list2b.txt
-62list2b.txt.ans
+62list2b.txt.count
 62list2c.txt
-62list2c.txt.ans
+62list2c.txt.count
 62list3a.txt
 counts.c
 counts.h
@@ -168,6 +171,7 @@ counts.o
 count_values
 count_values.stderr
 count_values.stdout
+grade.txt
 kv.c
 kv.h
 kv.o
@@ -198,15 +202,15 @@ I expected to find a file called '62list2c.txt.counts' but it did not exist
 (or was not a regular file)
 Here are the files that I can find:
 62list1a.txt
-62list1a.txt.ans
+62list1a.txt.count
 62list1b.txt
-62list1b.txt.ans
+62list1b.txt.count
 62list2a.txt
-62list2a.txt.ans
+62list2a.txt.count
 62list2b.txt
-62list2b.txt.ans
+62list2b.txt.count
 62list2c.txt
-62list2c.txt.ans
+62list2c.txt.count
 62list3a.txt
 counts.c
 counts.h
@@ -214,6 +218,7 @@ counts.o
 count_values
 count_values.stderr
 count_values.stdout
+grade.txt
 kv.c
 kv.h
 kv.o
@@ -245,23 +250,24 @@ I expected to find a file called '62list3a.txt.counts' but it did not exist
 (or was not a regular file)
 Here are the files that I can find:
 62list1a.txt
-62list1a.txt.ans
+62list1a.txt.count
 62list1b.txt
-62list1b.txt.ans
+62list1b.txt.count
 62list2a.txt
-62list2a.txt.ans
+62list2a.txt.count
 62list2b.txt
-62list2b.txt.ans
+62list2b.txt.count
 62list2c.txt
-62list2c.txt.ans
+62list2c.txt.count
 62list3a.txt
-62list3a.txt.ans
+62list3a.txt.count
 counts.c
 counts.h
 counts.o
 count_values
 count_values.stderr
 count_values.stdout
+grade.txt
 kv.c
 kv.h
 kv.o
