@@ -269,6 +269,9 @@ unsigned * get_match_counts(deck_t * hand) {
   }
   unsigned * counts = malloc(hand->n_cards * sizeof(*counts));
   for (int i = 0; i < hand->n_cards; i++) {
+    counts[i] = 0;
+  }
+  for (int i = 0; i < hand->n_cards; i++) {
     counts[i]++;
     for(int j = i + 1; j < hand->n_cards; j++) {
       if(hand->cards[i]->value == hand->cards[j]->value) {
