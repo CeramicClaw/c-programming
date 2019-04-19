@@ -73,4 +73,4 @@ deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
   //printf("%d\n",x);
   //deck_t * deck = hand_from_string(str, fc);
   //return EXIT_SUCCESS;
-/}
+//}
