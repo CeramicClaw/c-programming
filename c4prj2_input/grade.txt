@@ -1,0 +1,16 @@
+Grading at Fri Apr 19 18:30:43 UTC 2019
+Compiling cards.c -> cards.o
+Compiling deck.c -> deck.o
+Compiling input.c -> input.o
+input.c: In function ‘hand_from_string’:
+input.c:10:7: error: unused variable ‘n_cards’ [-Werror=unused-variable]
+   int n_cards = 0;
+       ^
+input.c: In function ‘read_input’:
+input.c:35:5: error: value computed is not used [-Werror=unused-value]
+     *n_hands++;
+     ^
+cc1: all warnings being treated as errors
+Compilation of input.c failed
+
+Overall Grade: F
