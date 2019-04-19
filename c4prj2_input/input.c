@@ -7,7 +7,6 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
   deck_t * ans = malloc(sizeof(*ans));
   ans->cards = malloc(sizeof(*ans->cards));
   ans->n_cards = 0;
-  int n_cards = 0;
   //printf("Line length: %zu\n", strchr(str, '\n') - str);
   int len = strchr(str, '\n') - str;
   for(int i = 0; i < len; i = i+3) {
