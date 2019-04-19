@@ -5,11 +5,12 @@
 
 void add_card_to(deck_t * deck, card_t c) {
   // Add the particular card to the given deck by realloc'ing the array of cards in that deck
+  //print_card(c);
   deck->n_cards++;
   deck->cards = realloc(deck->cards, deck->n_cards * sizeof(*deck->cards));
   deck->cards[deck->n_cards - 1] = malloc(sizeof(*deck->cards[deck->n_cards - 1]));
-  deck->cards[deck->n_cards - 1]->value = c.value;
-  deck->cards[deck->n_cards - 1]->suit = c.suit;
+  (*deck->cards[deck->n_cards - 1]).value = c.value;
+  (*deck->cards[deck->n_cards - 1]).suit = c.suit;
 }
 
 card_t * add_empty_card(deck_t * deck) {
