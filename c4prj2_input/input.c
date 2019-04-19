@@ -31,9 +31,9 @@ deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
     exit(EXIT_FAILURE);
   }
   while(getline(&line, &sz, f) >= 0) {
-    *n_hands++;
-    ans = realloc(ans, *n_hands * sizeof(*ans));
-    ans[*n_hands - 1] = hand_from_string(line, fc);
+    (*n_hands)++;
+    ans = realloc(ans, (*n_hands) * sizeof(*ans));
+    ans[(*n_hands) - 1] = hand_from_string(line, fc);
     //check if hand has at least 5 cards
   }
   free(line);
