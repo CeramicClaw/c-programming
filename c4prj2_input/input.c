@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include "future.h"
 
-int int_from_str(const char * str) {
+int int_from_str(const char * str, int * i) {
   int len;
   if (strchr(str,' ') != NULL) {
     len = strchr(str,' ') - str;
@@ -17,6 +17,7 @@ int int_from_str(const char * str) {
   char_int[len] = '\0';
   int ans = atoi(char_int);
   free(char_int);
+  *i = *i + 2 + len;
   //printf("%d\n", ans);
   return ans;
 }
@@ -31,16 +32,13 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
   while( i < len) {
     //print_card(card_from_letters(str[i], str[i+1]));
     if (str[i] == '?') {
-      add_future_card(fc, int_from_str(str+i+1),add_empty_card(ans));
-      i++;
+      add_future_card(fc, int_from_str(str+i+1, &i),add_empty_card(ans));
     }
-    else if (isalpha(str[i])) {
+    else {
       add_card_to(ans, card_from_letters(str[i],str[i+1]));
       i = i + 3;
     }
-    else {
-      i++;
-    }
+    //printf("i = %d\n",i);
   }
   return ans;
 }
@@ -66,7 +64,7 @@ deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
 
 // DELETE THIS WHEN SUBMITTING
 //int main(void) {
-//char * str = "As Jd Kh ?0 ?1 ?2 ?14\n";
+//char * str = "As Jd Kh ?14 ?1 ?2 ?0\n";
 //future_cards_t * fc = malloc(sizeof(*fc));
 //fc->decks = malloc(sizeof(*fc->decks));
 //fc->n_decks = 0;
@@ -75,4 +73,4 @@ deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
   //printf("%d\n",x);
   //deck_t * deck = hand_from_string(str, fc);
   //return EXIT_SUCCESS;
-//}
+/}
