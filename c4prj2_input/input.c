@@ -18,7 +18,7 @@ int int_from_str(const char * str, int * i) {
   int ans = atoi(char_int);
   free(char_int);
   *i = *i + 2 + len;
-  //printf("%d\n", ans);
+  //printf("ans = '%d'\n", ans);
   return ans;
 }
 
@@ -55,7 +55,10 @@ deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
     (*n_hands)++;
     ans = realloc(ans, (*n_hands) * sizeof(*ans));
     ans[(*n_hands) - 1] = hand_from_string(line, fc);
-    //check if hand has at least 5 cards
+    if (ans[(*n_hands) - 1]->n_cards < 5) {
+      fprintf(stderr,"Minimum 5 cards per hand.\n");
+      exit(EXIT_FAILURE);
+    }
   }
   free(line);
   return ans;
@@ -63,14 +66,14 @@ deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
 
 
 // DELETE THIS WHEN SUBMITTING
-//int main(void) {
-//char * str = "As Jd Kh ?14 ?1 ?2 ?0\n";
-//future_cards_t * fc = malloc(sizeof(*fc));
-//fc->decks = malloc(sizeof(*fc->decks));
-//fc->n_decks = 0;
+int main(void) {
+  char * str = "As Jd Kh ?14 ?12 ?0 ?1\n";
+  future_cards_t * fc = malloc(sizeof(*fc));
+  fc->decks = malloc(sizeof(*fc->decks));
+  fc->n_decks = 0;
   //char * str = "12 ";
   //int x = int_from_str(str);
   //printf("%d\n",x);
-  //deck_t * deck = hand_from_string(str, fc);
-  //return EXIT_SUCCESS;
-//}
+  deck_t * deck = hand_from_string(str, fc);
+  return EXIT_SUCCESS;
+}
