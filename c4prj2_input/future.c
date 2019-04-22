@@ -5,8 +5,8 @@
 void add_future_card(future_cards_t * fc, size_t index, card_t * ptr) {
   if( (index + 1) > fc->n_decks) { //Incorrect
     fc->decks = realloc(fc->decks, (index + 1) * sizeof(*fc->decks));
-    (fc->decks[index]).cards = malloc(sizeof(*(fc->decks[index]).cards));
-    (fc->decks[index]).n_cards = 0;
+    //(fc->decks[index]).cards = malloc(sizeof(*(fc->decks[index]).cards));
+    //(fc->decks[index]).n_cards = 0;
     fc->n_decks = index + 1;
   }
   (fc->decks[index]).n_cards++;
