@@ -34,9 +34,12 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
     if (str[i] == '?') {
       add_future_card(fc, int_from_str(str+i+1, &i),add_empty_card(ans));
     }
-    else {
+    else if (isalnum(str[i])) {
       add_card_to(ans, card_from_letters(str[i],str[i+1]));
       i = i + 3;
+    }
+    else {
+      i++;
     }
     //printf("i = %d\n",i);
   }
