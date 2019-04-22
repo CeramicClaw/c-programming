@@ -66,14 +66,14 @@ deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
 
 
 // DELETE THIS WHEN SUBMITTING
-int main(void) {
-  char * str = "As Jd Kh ?14 ?12 ?0 ?1\n";
-  future_cards_t * fc = malloc(sizeof(*fc));
-  fc->decks = malloc(sizeof(*fc->decks));
-  fc->n_decks = 0;
+//int main(void) {
+//char * str = "As Jd Kh ?14 ?12 ?0 ?1\n";
+//future_cards_t * fc = malloc(sizeof(*fc));
+//fc->decks = malloc(sizeof(*fc->decks));
+//fc->n_decks = 0;
   //char * str = "12 ";
   //int x = int_from_str(str);
   //printf("%d\n",x);
-  deck_t * deck = hand_from_string(str, fc);
-  return EXIT_SUCCESS;
-}
+  //deck_t * deck = hand_from_string(str, fc);
+//return EXIT_SUCCESS;
+//}
