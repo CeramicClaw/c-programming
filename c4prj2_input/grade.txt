@@ -1,12 +1,12 @@
-Grading at Mon Apr 22 16:35:19 UTC 2019
+Grading at Mon Apr 22 16:36:48 UTC 2019
 Compiling cards.c -> cards.o
 Compiling deck.c -> deck.o
 Compiling input.c -> input.o
 Compiling future.c -> future.o
 future.c: In function ‘add_future_card’:
-future.c:12:32: error: comparison between pointer and integer [-Werror]
-   if (fc->decks[index].n_cards == NULL) {
-                                ^
+future.c:12:34: error: comparison between pointer and integer [-Werror]
+   if ((fc->decks[index]).n_cards == NULL) {
+                                  ^
 cc1: all warnings being treated as errors
 Compilation of future.c failed
 
