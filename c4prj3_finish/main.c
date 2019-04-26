@@ -56,20 +56,21 @@ int findWinningHand (deck_t ** hands, size_t n_hands) {
   return index;
 }
 
-int findWinner(int * winArray, size_t n_hands) {
-  size_t index = 0;
-  for (int i = 0; i < (n_hands - 1); i++) {
-    if(winArray[index] < winArray[i + 1]) {
-      index = i + 1;
-    }
-  }
-  return index;
-}
+//int findWinner(int * winArray, size_t n_hands) {
+//size_t index = 0;
+//for (int i = 0; i < (n_hands - 1); i++) {
+//if(winArray[index] < winArray[i + 1]) {
+//index = i + 1;
+//}
+//}
+//return index;
+//}
 
 void printWins(int * winArray, size_t n_hands, int num_trials) {
-  int winner = findWinner(winArray, n_hands);
-  float winPct = 100* ((float)winArray[winner] / (float)num_trials);
-  printf("Hand %u won %u / %u times (%.2f%%)\n", winner, winArray[winner], num_trials, winPct);
+  for(int i = 0; i < n_hands; i++) {
+    float winPct = 100* ((float)winArray[i] / (float)num_trials);
+    printf("Hand %u won %u / %u times (%.2f%%)\n", i, winArray[i], num_trials, winPct);
+  }
   printf("And there were %u ties\n", winArray[n_hands]);
 }
 
