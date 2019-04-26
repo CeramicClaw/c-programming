@@ -161,6 +161,9 @@ int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs) {
       }
     }
     else {
+      if ((*(*hand).cards[index]).suit != fs) {
+	return 0;
+      }
       for (int i = 0; i < (*hand).n_cards; i++) {
 	if ( ((*(*hand).cards[i]).value == 5) && ( (*(*hand).cards[i]).suit == fs ) ) {
 	  return is_n_length_straight_at(hand, i, fs, 4);
